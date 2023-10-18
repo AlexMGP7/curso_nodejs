@@ -1,2 +1,2 @@
 # curso_nodejs
-mi curso de node
+mi curso de nodeen aprendizaje
