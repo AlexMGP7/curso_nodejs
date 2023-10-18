@@ -7,7 +7,7 @@ console.clear();
 
 //console.log("base: yargs", argv.b);
 
-crearArchivo(argv.base, argv.l)
+crearArchivo(argv.base, argv.l, argv.h)
   .then((result) => {
     console.log(result);
   })

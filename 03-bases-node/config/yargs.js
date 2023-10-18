@@ -22,7 +22,19 @@ const argv = require("yargs")
       throw "El listar tiene que ser un booleano";
     }
     return true;
+  })
+  .option("h", {
+    alias: "hasta",
+    type: 'number', 
+    default: 10,
+    describe: 'Hasta que numero multiplicar',
+  })
+  .check((argv, options) => {
+    if (isNaN(argv.h)) {
+      throw "El hasta tiene que ser un numero";
+    }
+    return true;
   }).argv;
-
+  
   
 module.exports = argv
