@@ -4,39 +4,40 @@ const { inquirerMenu, pausa, leerInput } = require("./helpers/inquirer");
 
 const Tareas = require("./models/tareas");
 
+const { guardarDB } = require("./helpers/guardarArchivo");
 
 const main = async () => {
+    let opt = "";
+    const tareas = new Tareas();
 
-  let opt = "";
-  const tareas = new Tareas();
+    do {
 
-  do {
+        // Imprimir el menu de opciones
+        opt = await inquirerMenu();
 
-    opt = await inquirerMenu();
-    
-    switch (opt) {
-      case '1':
-        const desc = await leerInput("Ingrese la descripción de la tarea:");
-        tareas.crearTarea(desc);
-      break;
+        switch (opt) {
+            case "1":
+                const desc = await leerInput("Ingrese la descripción de la tarea:");
+                tareas.crearTarea(desc);
+                break;
 
-      case '2':
-        console.log(tareas._listado);
-      break;
-    
-      default:
-        break;
-    }
+            case "2":
+                console.log(tareas.listadoArr);
+                break;
 
-    // console.log({ opt });
+            default:
+                break;
+        }
 
-    if (opt !== "0") {
-      await pausa();
-    }
+        // guardarDB(tareas.listadoArr);
 
-  } while (opt !== "0");
+        if (opt !== "0") {
+            await pausa();
+        }
+    } while (opt !== "0");
 
-  pausa();
+    pausa();
 };
 
 main();
+

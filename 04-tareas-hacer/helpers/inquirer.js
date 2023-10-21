@@ -8,31 +8,31 @@ const preguntas = [
         message: "¿Que desea hacer?",
         choices: [
             {
-                name: "1. Crear tarea",
+                name: `${"1.".green} Crear tarea`,
                 value: "1",
             },
             {
-                name: "2. Listar tareas",
+                name: `${"2.".green} Listar tareas`,
                 value: "2",
             },
             {
-                name: "3. Listar tareas completadas",
+                name: `${"3.".green} Listar tareas completadas`,
                 value: "3",
             },
             {
-                name: "4. Listar tareas pendientes",
+                name: `${"4.".green} Listar tareas pendientes`,
                 value: "4",
             },
             {
-                name: "5. Completar tarea",
+                name: `${"5.".green} Completar tarea`,
                 value: "5",
             },
             {
-                name: "6. Eliminar una tarea",
+                name: `${"6.".green} Eliminar una tarea`,
                 value: "6",
             },
             {
-                name: "0. Salir",
+                name: `${"0.".green} Salir`,
                 value: "0",
             },
         ],
@@ -40,9 +40,11 @@ const preguntas = [
 ];
 
 const inquirerMenu = async () => {
+    
     console.clear();
+
     console.log("=====================".green);
-    console.log(" Seleccione una opción:".green);
+    console.log(" Seleccione una opción:".white);
     console.log("=====================\n".green);
 
     const { opcion } = await inquirer.prompt(preguntas);
@@ -70,8 +72,8 @@ const leerInput = async (mensaje) => {
     const question = [
         {
             type: "input",
-            name: "desc",
-            mensaje,
+            name: "Descripcion",
+            message: mensaje,
             validate(value) {
                 if (value.length === 0) {
                     return 'Por favor ingrese un valor';
@@ -81,7 +83,7 @@ const leerInput = async (mensaje) => {
         }
     ];
 
-    const {desc} = await inquirer.prompt(question);
+    const { Descripcion: desc } = await inquirer.prompt(question);
     return desc;
 }
 
