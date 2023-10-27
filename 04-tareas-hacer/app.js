@@ -4,11 +4,19 @@ const { inquirerMenu, pausa, leerInput } = require("./helpers/inquirer");
 
 const Tareas = require("./models/tareas");
 
-const { guardarDB } = require("./helpers/guardarArchivo");
+const { guardarDB, leerDB } = require("./helpers/guardarArchivo");
 
 const main = async () => {
     let opt = "";
     const tareas = new Tareas();
+
+    const tareasDB = leerDB();
+
+    if (tareasDB) {
+        tareas.listadoArr = tareasDB;
+    }
+
+    await pausa();
 
     do {
 
