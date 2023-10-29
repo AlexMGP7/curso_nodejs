@@ -1,6 +1,6 @@
 require("colors");
 
-const { inquirerMenu, pausa, leerInput } = require("./helpers/inquirer");
+const { listadoTareasCheck, confirmar, inquirerMenu, listadoTareas, pausa, leerInput } = require("./helpers/inquirer");
 
 const Tareas = require("./models/tareas");
 
@@ -33,6 +33,35 @@ const main = async () => {
                 tareas.listadoCompleto();
                 break;
 
+            case "3":
+                tareas.listarPendientesCompletadas();
+                break;
+
+            case "4":
+                tareas.listarPendientesCompletadas(false);
+                break;
+
+            case "5":
+                const ids = await listadoTareasCheck(tareas.listadoArr);
+                // Completar una tarea
+
+                tareas.toggleCompletadas(ids);
+
+
+                break;
+
+            case "6":
+                // Eliminar una tarea
+                const id = await listadoTareas(tareas.listadoArr);
+
+                if (id === "0" || !await confirmar("¿Desea eliminar esta tarea?")) {
+                    break;
+                }
+                tareas.borrarTarea(id);
+                console.log("Tarea eliminada".green);
+
+                break;
+
             default:
                 break;
         }
@@ -44,7 +73,6 @@ const main = async () => {
         }
     } while (opt !== "0");
 
-    pausa();
 };
 
 main();

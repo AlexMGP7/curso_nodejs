@@ -32,12 +32,81 @@ const preguntas = [
                 value: "6",
             },
             {
-                name: `${"0.".green} Salir`,
+                name: `${"7.".green} Salir`,
                 value: "0",
             },
         ],
     },
 ];
+
+const listadoTareas = async(tareas = []) => {
+
+    const choices = tareas.map((tarea, i) => {
+
+        return {
+            name: `${`${i + 1}.`.green} ${tarea.desc}`,
+            value: tarea.id
+        }
+    });
+
+    choices.unshift({
+        name: `${"0.".green} Cancelar`,
+        value: "0",
+    })
+
+    const preguntas = [
+        {
+            type: "list",
+            name: "id",
+            message: "Seleccionar",
+            choices,
+        }
+    ]
+
+    const { id } = await inquirer.prompt(preguntas);
+
+    return id;
+
+}
+const listadoTareasCheck = async(tareas = []) => {
+
+    const choices = tareas.map((tarea, i) => {
+
+        return {
+            name: `${`${i + 1}.`.green} ${tarea.desc}`,
+            value: tarea.id,
+            checked: tarea.completadoEn ? true : false,
+        }
+    });
+
+    const pregunta = [
+        {
+            type: "checkbox",
+            name: "ids",
+            message: "Selecciones",
+            choices,
+        }
+    ]
+
+    const { ids } = await inquirer.prompt(pregunta);
+
+    return ids;
+
+}
+
+const confirmar = async(message) => {
+    const question = [
+        {
+            type: 'confirm',
+            name: 'confirm',
+            message
+        }
+    ];
+
+    const { confirm } = await inquirer.prompt(question);
+    return confirm;
+}
+
 
 const inquirerMenu = async() => {
 
@@ -90,4 +159,7 @@ module.exports = {
     inquirerMenu,
     pausa,
     leerInput,
+    listadoTareas,
+    confirmar,
+    listadoTareasCheck,
 };

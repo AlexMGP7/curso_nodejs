@@ -23,6 +23,12 @@ class Tareas {
         this._listado = {};
     }
 
+    borrarTarea(id = '') {
+        if (this._listado[id]) {
+            delete this._listado[id];
+        }
+    }
+
     cargarTareasFromArray(tareas = []) {
         tareas.forEach(tarea => {
             this._listado[tarea.id] = tarea;
@@ -37,10 +43,39 @@ class Tareas {
     }
 
     listadoCompleto() {
+        console.log();
         this.listadoArr.forEach((tarea, i) => {
-            console.log(`${`${i + 1}`.green}. ${tarea.desc} :: ${tarea.completadoEn ? "completado".green : "pendiente".red}`);
+            console.log(`${`${i + 1}`.green}. ${tarea.desc} :: ${(tarea.completadoEn) ? "completado".green : "pendiente".red}`);
         });
     }
+
+    listarPendientesCompletadas(completadas = true) {
+        console.log();
+
+        this.listadoArr.forEach((tarea, i) => {
+            if (completadas === false && tarea.completadoEn === null) {
+            console.log(`${`${i + 1}`.green}. ${tarea.desc} :: ${"pendiente".red}`);
+            } else if (completadas === true && tarea.completadoEn!== null) {
+            console.log(`${`${i + 1}`.green}. ${tarea.desc} :: ${`${tarea.completadoEn}`.green}`);
+            }
+        });
+
+    }
+
+    toggleCompletadas(ids = []) {
+
+        this.listadoArr.forEach( tarea => {
+            if (ids.includes(tarea.id)) {
+                tarea.completadoEn = new Date();
+            }
+            else {
+                tarea.completadoEn = null;
+            }
+        })
+
+    }
+
+
 
 }
 
