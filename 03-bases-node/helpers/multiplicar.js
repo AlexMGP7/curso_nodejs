@@ -20,7 +20,7 @@ const crearArchivo = (base = 5, listar = false, hasta = 10) => {
     }
  
     if (salida) {
-      fs.writeFileSync(`../salida/tabla-${base}.txt`, salida);
+      fs.writeFileSync(`./salida/tabla-${base}.txt`, salida);
       resolve(`${colors.rainbow(`Tabla-${base}.txt`)} creado (del 1 al ${hasta})`);
     } else {
       reject(`Hubo un error con la salida`);
