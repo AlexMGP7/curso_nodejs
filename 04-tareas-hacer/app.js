@@ -7,16 +7,16 @@ const Tareas = require("./models/tareas");
 const { guardarDB, leerDB } = require("./helpers/guardarArchivo");
 
 const main = async () => {
+
     let opt = "";
+
     const tareas = new Tareas();
 
     const tareasDB = leerDB();
 
     if (tareasDB) {
-        tareas.listadoArr = tareasDB;
+        tareas.cargarTareasFromArray(tareasDB);
     }
-
-    await pausa();
 
     do {
 
@@ -30,14 +30,14 @@ const main = async () => {
                 break;
 
             case "2":
-                console.log(tareas.listadoArr);
+                tareas.listadoCompleto();
                 break;
 
             default:
                 break;
         }
 
-        // guardarDB(tareas.listadoArr);
+        guardarDB(tareas.listadoArr);
 
         if (opt !== "0") {
             await pausa();

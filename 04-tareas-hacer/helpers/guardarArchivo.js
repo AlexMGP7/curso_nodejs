@@ -1,25 +1,28 @@
-const fs = require("fs");
+const fs = require('fs');
 
-const archivo = "./db/data.json";
-const guardarDB = (data) => {
-    try {
-        fs.writeFileSync(archivo, JSON.stringify(data));
-        console.log(`Los datos se han guardado correctamente en ${archivo}`);
-    } catch (error) {
-        console.error(`Error al guardar los datos: ${error.message}`);
-    }
-};
+const archivo = './db/data.json';
+
+const guardarDB = ( data ) => {
+    fs.writeFileSync( archivo, JSON.stringify(data) );
+}
 
 const leerDB = () => {
-    if (!fs.existsSync(archivo)) {
+    
+    if( !fs.existsSync(archivo) ){
         return null;
     }
-    const data = JSON.parse(fs.readFileSync(archivo, "utf8"));
-    console.log(data);
-    return null;
-};
+    
+    const info = fs.readFileSync(archivo, { encoding: 'utf-8' });
+    const data = JSON.parse( info );
+
+    //console.log(data);
+
+    return data;
+}
+
+
 
 module.exports = {
     guardarDB,
-    leerDB,
-};
+    leerDB
+}
