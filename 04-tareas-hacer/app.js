@@ -20,7 +20,7 @@ const main = async () => {
 
     do {
 
-        // Imprimir el menu de opcionesd peneee
+        // Imprimir el menu de opciones
         opt = await inquirerMenu();
 
         switch (opt) {
